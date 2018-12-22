@@ -11,3 +11,5 @@
     const EXT = '.php';
     const APPNAME = 'Great Shopaholic';
     const SLOGAN = 'Lets Build Cool Site';
+
+    define('DB', ROOT.'/db/');
