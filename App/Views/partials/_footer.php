@@ -5,5 +5,5 @@
             <li><a href="#"><i class="icon circle fa fa-google-plus" aria-hidden="true"><span class="label">Google+</span></i></a></li>
             <li class="github"><a href="#"><i class="icon circle fa fa-github" aria-hidden="true"><span class="label">Github</span></i></a></li>
             <li><a href="#"><i class="icon circle fa fa-dribbble" aria-hidden="true"><span class="label">Dribbble</span></i></a></li>
-        </ul> <span class="text-muted">&copy; Copyrights Red Cats. All rights reserved.</span>
+        </ul> <span class="text-muted">&copy; Copyrights Red Cats. All rights reserved. 2020</span>
 </footer>
