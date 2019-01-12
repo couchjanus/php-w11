@@ -1,3 +1,4 @@
+<?php require_once VIEWS.'partials/_aside.php';?>
 <footer class="footer" id="footer">
         <ul class="icons">
             <li><a href="#"><i class="icon circle fa fa-twitter" aria-hidden="true"><span class="label">Twitter</span></i></a></li>
@@ -7,3 +8,6 @@
             <li><a href="#"><i class="icon circle fa fa-dribbble" aria-hidden="true"><span class="label">Dribbble</span></i></a></li>
         </ul> <span class="text-muted">&copy; Copyrights Red Cats. All rights reserved. 2020</span>
 </footer>
+<?php require_once VIEWS.'partials/_scripts.php';?>
+</body>
+</html>

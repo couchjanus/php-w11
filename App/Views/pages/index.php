@@ -1,7 +1,4 @@
-<?php
-// require_once VIEWS.'partials/_head.php';
-// require_once VIEWS.'partials/_navigation.php';
-?>
+<?php //require_once VIEWS.'partials/_head.php';?>
 
 <!-- product Start -->
 
@@ -15,5 +12,4 @@
 <div id="shadow-layer" class="shadow-layer"></div>
 
 <?php
-// require_once VIEWS.'partials/_aside.php';
-// require_once VIEWS.'partials/_footer.php';
+//require_once VIEWS.'partials/_footer.php';
