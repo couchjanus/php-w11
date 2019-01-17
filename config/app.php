@@ -13,3 +13,13 @@
     const SLOGAN = 'Lets Build Cool Site';
 
     define('DB', ROOT.'/db/');
+
+    const DRIVER = 'mysql';
+    const HOST = 'localhost';
+    const DBASE   = 'store';
+    const USER = 'root';
+    const PASSWORD = 'ghbdtn';
+    const CHARSET = 'utf8mb4';
+
+    define('DB_CONFIG_FILE', CONFIG.'db.php');
+    define('LOGS', ROOT.'/logs/');
