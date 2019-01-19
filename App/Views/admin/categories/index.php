@@ -1,6 +1,3 @@
-<?php
-require_once VIEWS.'partials/admin/_head.php';
-?>
 <div class="content-box-large">
   <div class="panel-heading">
     <div class="panel-title"><h3><?= $title;?></h3></div>
@@ -25,8 +22,8 @@ require_once VIEWS.'partials/admin/_head.php';
         <td><?php echo $category->name;?></td>
         <td>
           <button class="btn btn-default"><span data-feather="eye"></span> View</button>
-          <button class="btn btn-primary"><span data-feather="edit"></span> Edit</button>
-          <button class="btn btn-danger"><span data-feather="delete"></span> Delete</button></td>
+          <a href="/admin/categories/edit/<?=$category->id?>"><button class="btn btn-primary"><span data-feather="edit"></span> Edit</button></a>
+          <a href="/admin/categories/delete/<?=$category->id?>"><button class="btn btn-danger"><span data-feather="delete"></span> Delete</button></a></td>
         </tr>
     <?php endforeach;?>
     
@@ -36,6 +33,3 @@ require_once VIEWS.'partials/admin/_head.php';
     <h3>Not Catehories yet...</h3>
 <?php endif; ?>
 </div>
-
-<?php
-require_once VIEWS.'partials/admin/_footer.php';

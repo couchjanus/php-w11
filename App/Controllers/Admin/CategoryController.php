@@ -40,4 +40,34 @@ class CategoryController extends Controller
         $this->_view->showBack('admin/categories/create', $data);
     }
 
+    public function edit($vars)
+    {
+        extract($vars);
+        $category = Category::getCategoryById($id);
+
+        //Принимаем данные из формы
+        if (isset($_POST) and !empty($_POST)) {
+            $options['name'] = trim(strip_tags($_POST['name']));
+            $options['status'] = $_POST['status'];
+            Category::update($id, $options);
+            Helper::redirect('/admin/categories');
+        }
+        $data['category'] = $category;
+        $data['title'] = 'Admin Category Edit Page ';
+        $this->_view->showBack('admin/categories/edit', $data);
+    }
+    public function delete($vars)
+    {
+        extract($vars);
+        if (isset($_POST['submit'])) {
+            Category::destroy($id);
+            Helper::redirect('/admin/categories');
+        } elseif (isset($_POST['reset'])) {
+            Helper::redirect('/admin/categories');            
+        }
+        $data['title'] = 'Admin Delete Category ';
+        $data['category'] = Category::getCategoryById($id);
+        $this->_view->showBack('admin/categories/delete', $data);
+    }
+
 }

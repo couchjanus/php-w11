@@ -1,5 +1,5 @@
 <?php
-require_once VIEWS.'partials/admin/_head.php';
+// require_once VIEWS.'partials/admin/_head.php';
 ?>
 <div class="content-box-large">
   <div class="panel-heading">
@@ -31,4 +31,4 @@ require_once VIEWS.'partials/admin/_head.php';
 </div>
 
 <?php
-require_once VIEWS.'partials/admin/_footer.php';
+// require_once VIEWS.'partials/admin/_footer.php';

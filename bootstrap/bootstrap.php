@@ -17,22 +17,22 @@ require_once realpath(__DIR__).'/../config/app.php';
 require_once CORE.'Helper.php';
 require_once CORE.'View.php';
 require_once CORE.'Connection.php';
+require_once CORE.'Request.php';
+require_once CORE.'Router.php';
+require_once CORE.'Controller.php';
 
 $connection = Connection::connect(require_once DB_CONFIG_FILE);
 
-// $connection = new Connection(require_once DB_CONFIG_FILE);
+// $uri = Request::uri();
+// $method = Request::method();
 
-// if (!$connection) {
-//     echo "Ошибка: Невозможно установить соединение с MySQL." . PHP_EOL;
-//     exit;
-// }
-// echo "Соединение с MySQL установлено!" . PHP_EOL;
+// var_dump(Router::load());
 
-// $stmt = Connection::query("SELECT * FROM categories ORDER BY id ASC");
-// $stmt = $connection->pdo->query("SELECT * FROM categories ORDER BY id ASC");
-// $categories = $stmt->fetchAll(PDO::FETCH_CLASS);
+// var_dump(Router::initTest('Hello LSB'));
 
-// var_dump($categories);
+const ROUTES = CONFIG.'routes'.EXT; 
 
-require_once CORE.'Controller.php';
-require_once CORE.'Router.php';
+// var_dump(Router::init(ROUTES));
+
+// var_dump(Router::init(ROUTES)->direct(Request::uri()));
+Router::init(ROUTES)->direct(Request::uri());

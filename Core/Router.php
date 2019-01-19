@@ -1,77 +1,175 @@
 <?php
+/**
+ * class Router
+ */
 
-function getURI()
+// class Router
+// {
+//     protected $routes = [];
+   
+//     public static function init($file)
+//     {
+//         $router = new static;
+//         require $file;
+//         return $router;
+//     }
+
+//     public static function initTest($param)
+//     {
+//         $foo = new static();
+//         $foo->name = $param;
+//         return $foo;
+//     }
+
+//     public static function load()
+//     {
+//         $router = new static();
+//         return $router;
+//     }
+
+//     public function define($routes)
+//     {
+//         $this->routes = $routes;
+//     }
+
+//     public function direct($uri)
+//     {
+//         if(array_key_exists($uri, $this->routes)) {
+//             return $this->routes[$uri];
+//         }
+
+//         throw new Exception("No Route defined");
+//     }
+// }
+
+// class Router
+// {
+//     protected $routes = [];
+   
+//     public static function init($file)
+//     {
+//         $router = new static;
+//         require $file;
+//         return $router;
+//     }
+
+//     public function define($routes)
+//     {
+//         $this->routes = $routes;
+//     }
+
+//     public function direct($uri)
+//     {
+//         if (array_key_exists($uri, $this->routes)) {
+//             return $this->callAction(
+//                 ...$this->getAction($this->routes[$uri])
+//             );
+//         } else {
+//             return $this->callAction(
+//                 ...$this->getAction($this->routes['404'])
+//             ); 
+//         }
+//     }
+
+//     private function getAction($route)
+//     {
+//         list($segments, $action) = explode('@', $route);
+//         $segments = explode('\\', $segments);
+//         $controller = array_pop($segments);
+//         $getControllerPatg = '/';
+//         do {
+//             if (count($segments)==0) {
+//                 return array ($controller, $action, $getControllerPatg);
+//             } else {
+//                 $segment = array_shift($segments);
+//                 $getControllerPatg = $getControllerPatg.$segment.'/';
+//             }
+//         } while ( count($segments) >= 0);
+
+//     }
+
+//     protected function callAction($controller, $action, $getControllerPath)
+//     {
+//         include CONTROLLERS.$getControllerPath.'/'.$controller.EXT;
+        
+//         $controller = new $controller;
+        
+//         if (! method_exists($controller, $action)) {
+//             throw new Exception(
+//                 "{$controller} does not respond to the {$action} action."
+//             );
+//         }
+//         return $controller->$action();
+//     }
+// }
+
+class Router
 {
-    if (isset($_SERVER['REQUEST_URI']) and !empty($_SERVER['REQUEST_URI']))
-        return trim($_SERVER['REQUEST_URI'], '/');
-}
+    protected $routes = [];
+   
+    public static function init($file)
+    {
+        $router = new static;
+        require $file;
+        return $router;
+    }
 
-function getPathAction($route)
-{
-    $segments = explode('\\', $route);
-    $controller = array_pop($segments);
-    $controllerPath = '/';
+    public function define($routes)
+    {
+        $this->routes = $routes;
+    }
 
-    do {
-        if (count($segments)===0) {
-            return array ($controller, $controllerPath);
+    public function direct($uri)
+    {
+        if (array_key_exists($uri, $this->routes)) {
+            return $this->callAction(
+                ...$this->getAction($this->routes[$uri])
+            );
         } else {
-            $segment = array_shift($segments);
-            $controllerPath = $controllerPath . $segment . '/';
-        }
-    } while (count($segments)>=0);
-}
-    
-// получаем строку запроса
-$uri = getURI();
-
-$filename = CONFIG.'routes'.EXT;
-
-if (file_exists($filename)) {
-    $routes = include_once $filename;
-} else {
-    echo "Файл $filename не существует";
-}
-
-// Проверить наличие такого запроса в routes
-
-foreach ($routes as $route => $path) {
-
-    //Сравниваем route и $uri
-    if ($route == $uri) {
-        
-        // Определить path
-        // $controller = $path;
-        // $action = 'index';
-        
-        // $segments = $path;
-
-        // list($controller, $controllerPath) = getPathAction($path);
-        list($segments, $controllerPath) = getPathAction($path);
-        
-        list($controller, $action) = explode('@', $segments);
-
-        //Подключаем файл контроллера
-        // $controllerFile = CONTROLLERS . $controller . EXT;
-        $controllerFile = CONTROLLERS .$controllerPath . $controller . EXT;
-
-        
-        if (file_exists($controllerFile)) {
-            include_once $controllerFile;
-            $controller = new $controller;
-
-            if (method_exists($controller, $action)) {
-                $controller->$action();
+            foreach ($this->routes as $key => $val) {
+                
+                $pattern = "@^" .preg_replace('/{([a-zA-Z0-9]+)}/', '(?<$1>[0-9]+)', $key). "$@";
+                preg_match($pattern, $uri, $matches);
+                array_shift($matches);
+                if ($matches) {
+                    $getAction = $this->getAction($val);
+                    return $this->callAction($getAction[0], $getAction[1], $getAction[2], $matches);
+                }
             }
-            $result = true;
-        }
-            
-        if ($result !== null) {
-            break;
+            return $this->callAction(
+                ...$this->getPathAction($this->routes['404'])
+            ); 
         }
     }
-}
+
+    private function getAction($route)
+    {
+        list($segments, $action) = explode('@', $route);
+        $segments = explode('\\', $segments);
+        $controller = array_pop($segments);
+        $getControllerPath = '/';
+        do {
+            if (count($segments)==0) {
+                return array ($controller, $action, $getControllerPath);
+            } else {
+                $segment = array_shift($segments);
+                $getControllerPath = $getControllerPath.$segment.'/';
+            }
+        } while ( count($segments) >= 0);
+
+    }
+
+    protected function callAction($controller, $action, $getControllerPath, $vars = [])
+    {
+        include CONTROLLERS.$getControllerPath.'/'.$controller.EXT;
         
-if ($result === null) {
-    include_once VIEWS.'errors/404'.EXT;
+        $controller = new $controller;
+        
+        if (! method_exists($controller, $action)) {
+            throw new Exception(
+                "{$controller} does not respond to the {$action} action."
+            );
+        }
+        return $controller->$action($vars);
+    }
 }
