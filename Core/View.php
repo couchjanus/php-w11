@@ -30,7 +30,7 @@ class View {
         return $this->getBackHeader().$this->renderContent($path, $data, $error).$this->getBackFooter();
     } 
 
-    public function render($path, $data = [], $error = false)
+    public function auth($path, $data = [], $error = false)
     {
         extract($data);
         return require VIEWS."/{$path}.php";

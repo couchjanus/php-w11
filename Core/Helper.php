@@ -22,4 +22,78 @@ class Helper {
         }
     }
 
+    /**
+     * 
+     *Запись пользователя в сессию
+     *
+     * @param $userId
+     */
+    // public static function auth($userId)
+    // {
+    //     $_SESSION['userId'] = $userId;
+    //     $_SESSION['logged'] = true;
+    // }
+
+    public static function auth($userId)
+    {
+        Session::set('userId', $userId);
+        Session::set('logged', true);
+    }
+
+    /**
+     * Проверяем, авторизован ли пользователь при переходе в личный кабинет
+     *
+     * @return mixed
+     */
+    
+    // public static function checkLog()
+    // {
+    //     //Если сессия есть, то возвращаем id пользователя
+    //     if ($_SESSION['userId']) {
+    //         return $_SESSION['userId'];
+    //     }
+    //     self::redirect('/login');
+    // }
+
+    /**
+     * Проверяем, авторизован ли пользователь при переходе в личный кабинет
+     *
+     * @return mixed
+     */
+    public static function checkLog()
+    {
+         //Если сессия есть, то возвращаем id пользователя
+        if ((Session::get('userId'))) {
+            return Session::get('userId');
+        }
+        self::redirect('/login');
+    }
+    /**
+     * Проверяем наличие открытой сессии у пользователя для
+     * отображения на сайте необходимой информации
+     *
+     * @return bool
+     */
+    
+    // public static function isGuest()
+    // {    
+    //     if (isset($_SESSION['logged']) && !empty($_SESSION['logged'])) {
+    //         return false;
+    //     }
+    //     return true;
+    // }
+
+     /**
+     * Проверяем наличие открытой сессии у пользователя для
+     * отображения на сайте необходимой информации
+     *
+     * @return bool
+     */
+    public static function isGuest()
+    {
+        if (Session::get('logged') == true) {
+            return false;
+        }
+        return true;
+    }
 }

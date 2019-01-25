@@ -10,6 +10,11 @@
 
                 <li class="nav-item"><a href="contact">Contact</a></li>
                 <li class="nav-item"><a href="#" id="cart-trigger"><i class="fa fa-shopping-cart"></i>&nbsp;Cart</a></li>
+                <?php if (Helper::isGuest()) :?>
+                    <li class="nav-item"><a href="auth" id="auth"><i class="fa fa-user"></i>&nbsp;Sign In/Up</a></li>
+                <?php else :?>    
+                    <li class="nav-item"><a href="logout" id="logout"><i class="fa fa-user"></i>&nbsp;Sign Out</a></li>
+                <?php endif;?>
             </ul>
         </nav>
 </header>
