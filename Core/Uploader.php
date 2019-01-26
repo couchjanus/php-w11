@@ -2,19 +2,23 @@
 /**
  * 
  */
-class Upload
+
+class Uploader
 {
     //default settings
-    private $destination = '/images/';
-    private $fileName = 'file.txt';
+    
+    private $destination='images';
+    private $fileName = '';
     private $maxSize = '2097152'; // bytes (1048576 bytes = 1 meg)
+
     private $allowedExtensions = array('image/jpeg','image/png','image/gif'); // mime types
+    
     public $error = [];
-   
-    //START: Functions to Change Default Settings
-    public function setDestination($newDestination) {
-      $this->destination = $newDestination;
+
+    public function __construct($newDestination) {
+        $this->destination = $newDestination;
     }
+ 
     public function setFileName($newFileName) {
       $this->fileName = $newFileName;
     }
@@ -22,6 +26,7 @@ class Upload
     public function setMaxSize($newSize) {
       $this->maxSize = $newSize;
     }
+
     public function setAllowedExtensions($newExtensions) {
       if (is_array($newExtensions)) {
         $this->allowedExtensions = $newExtensions;
@@ -36,11 +41,18 @@ class Upload
       $this->validate($file);
    
       if ($this->error) {
-        if ($this->printError) print $this->error;
+        $_SESSION['errors'] = $this->error;
+        var_dump($this->error);
       }
       else {
-        move_uploaded_file($file['tmp_name'][0], $this->destination.$this->fileName) or 
-        array_push($this->error, 'Destination Directory Permission Problem.');
+        $name = uniqid('files_').'.'.strtolower(pathinfo($file['name'])['extension']);
+                
+        if (move_uploaded_file($file['tmp_name'], $this->destination.$name)) {
+          return $name;
+        } else {
+          array_push($this->error, 'Destination Directory Permission Problem.');
+          var_dump($this->error);
+        }
       }
     }
 
@@ -57,15 +69,15 @@ class Upload
 
     public function validate($file) {
       //check file exist
-      if (empty($file['name'][0])) 
+      if (empty($file['name'])) 
       array_push($this->error, 'No file found.');
       
       //check allowed extensions
       if (!in_array($this->getExtension($file),$this->allowedExtensions)) 
-      array_push($this->error, 'Extension is not allowed.');
-      
+      array_push($this->error, 'MIME type is not allowed.');
+     
       //check file size
-      if ($file['size'][0] > $this->maxSize) 
+      if ($file['size'] > $this->maxSize) 
       array_push($this->error, 'Max File Size Exceeded. Limit: '.$this->maxSize.' bytes.');
     }
 

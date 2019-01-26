@@ -8,8 +8,6 @@ class Category
 
     public static function index() 
     {
-        // $connection = new Connection(require_once DB_CONFIG_FILE);
-        // $stmt = $connection->pdo->query("SELECT * FROM categories ORDER BY id ASC");
         $stmt = Connection::query("SELECT * FROM categories ORDER BY id ASC");
         $categories = $stmt->fetchAll(PDO::FETCH_CLASS, 'Category');
         return $categories;
@@ -28,8 +26,7 @@ class Category
             WHERE status = 1
             ORDER BY id ASC"
         );
-        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $categories;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function store($opts)
@@ -56,7 +53,7 @@ class Category
     }
     
     /* Выбор категории по id  */
-    public static function getCategoryById($id)
+    public static function getById($id)
     {
         $stmt = Connection::prepare("SELECT * FROM categories  WHERE id = :id");
         $stmt->bindParam(':id', $id);

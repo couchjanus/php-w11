@@ -17,6 +17,7 @@ require_once realpath(__DIR__).'/../config/app.php';
 require_once CORE.'Session.php';
 require_once CORE.'Helper.php';
 require_once CORE.'View.php';
+require_once CORE.'Slug.php';
 require_once CORE.'Connection.php';
 require_once CORE.'Request.php';
 require_once CORE.'Router.php';
@@ -25,17 +26,11 @@ require_once CORE.'Controller.php';
 
 
 // Запускаем сессию
-// session_start();
-
-// Передача опций в session_start()
-// Переопределение времени жизни cookie
-// Устанавливаем время жизни равным одному дню.
-// session_start([
-//    'cookie_lifetime' => 86400,
-// ]);
-
 Session::init();
 
 $connection = Connection::connect(require_once DB_CONFIG_FILE);
 const ROUTES = CONFIG.'routes'.EXT; 
-Router::init(ROUTES)->direct(Request::uri());
+// Router::init(ROUTES)->direct(Request::uri());
+
+Router::load(ROUTES)
+    ->directPath(Request::uri(), Request::method());

@@ -64,10 +64,6 @@ class AuthController extends Controller
      */
     public function signin()
     {
-        // if ($_SESSION['userId']) {
-        //     Helper::redirect('/profile'); //перенаправляем в личный кабинет
-        // }
-
         if (Session::get('logged') == true) {
             Helper::redirect('/profile'); //перенаправляем в личный кабинет
         }
@@ -95,9 +91,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        // session_unset();
         Session::destroy();
         Helper::redirect('/');
-        
     }   
 }

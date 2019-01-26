@@ -1,6 +1,3 @@
-<?php
-require_once VIEWS.'partials/admin/_head.php';
-?>
 <div class="content-box-large">
   <div class="panel-heading">
     <div class="panel-title"><h3><?= $title;?></h3></div>
@@ -38,6 +35,3 @@ require_once VIEWS.'partials/admin/_head.php';
     <h3>Not Products yet...</h3>
 <?php endif; ?>
 </div>
-
-<?php
-require_once VIEWS.'partials/admin/_footer.php';

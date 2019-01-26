@@ -36,14 +36,14 @@ class CategoryController extends Controller
             Helper::redirect('/admin/categories');
         }
 
-        $data['title'] = 'Admin Category Add New Category ';
+        $data['title'] = 'Add New Category ';
         $this->_view->showBack('admin/categories/create', $data);
     }
 
     public function edit($vars)
     {
         extract($vars);
-        $category = Category::getCategoryById($id);
+        $category = Category::getById($id);
 
         //Принимаем данные из формы
         if (isset($_POST) and !empty($_POST)) {
@@ -66,7 +66,7 @@ class CategoryController extends Controller
             Helper::redirect('/admin/categories');            
         }
         $data['title'] = 'Admin Delete Category ';
-        $data['category'] = Category::getCategoryById($id);
+        $data['category'] = Category::getById($id);
         $this->_view->showBack('admin/categories/delete', $data);
     }
 
