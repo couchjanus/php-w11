@@ -1,5 +1,7 @@
 <?php
+namespace App\Controllers;
 
+use Core\Controller;
 
 class PagesController extends Controller
 {

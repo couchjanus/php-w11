@@ -1,5 +1,5 @@
 <?php
-
+namespace Core;
 class Session
 {
     private static $_sessionStarted = false;

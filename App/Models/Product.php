@@ -1,4 +1,11 @@
 <?php
+
+namespace App\Models;
+
+use Core\Connection;
+use Core\Slug;
+use PDO;
+
 class Product
 {
     //Количество отображаемых товаров по умолчанию
@@ -112,5 +119,4 @@ class Product
         $stmt = Connection::query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
 }

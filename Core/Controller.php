@@ -1,4 +1,7 @@
 <?php
+namespace Core;
+
+use Core\View;
 
 class Controller {
 
@@ -9,12 +12,4 @@ class Controller {
         $this->_view = new View();
 
     }
-
-    // public static function redirect($redirect_url = '/')
-    // {
-    //     header('HTTP/1.1 200 OK');
-    //     header('Location: http://'.$_SERVER['HTTP_HOST'].$redirect_url);
-    //     exit();
-    // }
-
 }

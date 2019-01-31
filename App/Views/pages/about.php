@@ -1,8 +1,3 @@
-<?php
-require_once VIEWS.'partials/_head.php';
-require_once VIEWS.'partials/_navigation.php';
-?>
-
 <!-- product Start -->
 
 <h1><?=$title?></h1>        
@@ -12,7 +7,3 @@ require_once VIEWS.'partials/_navigation.php';
 
 <!-- Our product End -->
 <div id="shadow-layer" class="shadow-layer"></div>
-
-<?php
-require_once VIEWS.'partials/_aside.php';
-require_once VIEWS.'partials/_footer.php';

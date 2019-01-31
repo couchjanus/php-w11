@@ -1,4 +1,8 @@
 <?php
+namespace App\Models;
+
+use Core\Connection;
+use PDO;
 /**
  * class User
  */
@@ -84,6 +88,34 @@ class User
         return $stmt->execute();
     }
 
+    public static function updateProfile($userId, $options)
+    {
+        $sql = "UPDATE users
+                SET phone_number = :phone_number, first_name = :first_name, last_name = :last_name
+                WHERE id = :id";
+        $stmt = Connection::prepare($sql);
+        $stmt->bindParam(':phone_number', $options['phone_number'], PDO::PARAM_STR);
+        $stmt->bindParam(':first_name', $options['first_name'], PDO::PARAM_STR);
+        $stmt->bindParam(':last_name', $options['last_name'], PDO::PARAM_STR);
+        $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+
+    public static function checkPhoneNumber($id)
+    {
+        $sql = "SELECT phone_number FROM users
+                    WHERE id = :id";
+        $stmt = Connection::prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        if ($stmt->fetchColumn())
+            return $stmt->fetchColumn();
+        return false;
+    }
+
+
     /**
      * Проверка на существовние введенных данных при ааторизации
      *
@@ -106,7 +138,5 @@ class User
         }
         return false;
     }
-
-    
     
 }

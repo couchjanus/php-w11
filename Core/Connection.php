@@ -1,12 +1,31 @@
 <?php
+namespace Core;
+
+use PDO;
+
 /**
  * class Connection
+ * configuration
+ * $connection = Connection::getInstance();
+ * $connection->connect('dbname=testing');
  */
 
 class Connection
 {
+    static private $instance = null;
+    
+    static public function getInstance()
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+        
     static private $_pdo = null;
+    
     const ERROR_UNABLE = 'ERROR: no database connection';
+    
     public $pdo;
 
     public function __construct(array $config)

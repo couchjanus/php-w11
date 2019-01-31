@@ -1,34 +1,34 @@
 <!-- Aside Area Start -->
 <aside id="cart-sidebar" class="cart">
-    <a href="" class="remove"><i class="fa fa-times fa-2x"></i></a>
-    
+    <a class="remove"><i class="fa fa-times fa-2x"></i></a>
+
     <h2>Cart</h2>
     <!-- cart-items start-->
     <ul class="cart-items">
-       
-    </ul> 
+
+    </ul>
     <!-- cart-items end -->
 
     <div class="cart-total">
         <p>Total <span>$00.00</span></p>
     </div> <!-- cart-total -->
-    <a href="#" class="checkout-button">Checkout</a>
+    <a href="#" class="checkout-button checkout__trigger">Checkout</a>
     <a href="#" class="clear-cart">Clear Cart</a>
 </aside> <!-- cart end -->
 <!-- Aside Area end -->
 <template id="cartItem">
-  <li>
-    <span class="productInCart"></span>
-      <span class="qty">
-        <span class="item-quantities">
+    <li>
+        <span class="productInCart"></span>
+        <span class="qty">
+            <span class="item-quantities">
+            </span>
         </span>
-      </span>
-      <span class="item-name">
-      </span>
-      <span class="item-prices">
-      </span>
-      <a class="item-remove" href="#0"><i class="fa fa-times"></i></a>
-  </li>
+        <span class="item-name">
+        </span>
+        <span class="item-prices">
+        </span>
+        <a class="item-remove" href="#0"><i class="fa fa-times"></i></a>
+    </li>
 </template>
 
 <template id="productDetail">
@@ -63,51 +63,114 @@
 
 <template id="productItem">
     <article class="grid-item">
-      <div class="product-wrapper">    
-        <div class="product">
-          <p class="product-name">Very&nbsp;Big&nbsp;Cat</p>
-          <div class="icon">
-            <div class="icon-background"></div>
-              <span class="shopping-cart">
-                <i class="fa fa-shopping-cart fa-2x"></i>
-              </span>
+        <div class="product-wrapper">
+            <div class="product">
+                <p class="product-name">Very&nbsp;Big&nbsp;Cat</p>
+                <div class="icon">
+                    <div class="icon-background"></div>
+                    <span class="shopping-cart">
+                        <i class="fa fa-shopping-cart fa-2x"></i>
+                    </span>
+                </div>
+                <div class="product_picture">
+                    <img alt="Nice Cat" class="product-picture" />
+                </div>
+                <span class="product-description"></span>
+                <div class="product-menu product-id" productId=''>
+                    <div class="product-price">
+                        9.99
+                    </div>
+                    <div class="buy-now">
+                        Buy now!
+                    </div>
+                    <div class="product-detail">
+                        Detail
+                    </div>
+
+                    <div class="how-many">
+                        <div class="quantity-input">
+                            <input class="minus btn" type="button" value="-">
+                            <input class="input-text quantity text" value="3" size="4">
+                            <input class="plus btn" type="button" value="+">
+                        </div>
+                    </div>
+                    <div class="cancel">
+                        Cancel
+                    </div>
+                    <div class="add-to-cart">
+                        Add to Cart!
+                    </div>
+                </div>
+            </div>
+            <div class="product-back">
+                <span class="check">
+                    <i class="fa fa-check fa-4x"></i>
+                    <p>Success!</p>
+                </span>
+            </div>
+        </div>
+    </article>
+</template>
+
+<template id="order-form">
+  <div class="form-wrapper">
+    <div class="order-card">
+      <div class="step"">
+        <div class=" title">
+          <h1>Finalize Order</h1>
+        </div>
+      </div>
+      <div class="content" id="final_products">
+        <div class="left" id="ordered">
+          <div class="products">
+            <div class="product_details">
+              <span class="product_name">Your Order:</span>
+              <span class="price">00.00</span>
+            </div>
           </div>
-          <div class="product_picture">
-              <img alt="Nice Cat" class="product-picture" />
+          <div class="totals">
+            <span class="subtitle">Subtotal <span id="sub_price">$45.00</span></span>
+            <span class="subtitle">Tax <span class="sub_tax" id="sub_tax">$2.00</span></span>
+            <span class="subtitle">Shipping <span class="sub_ship id="sub_ship">$4.00</span></span>
           </div>
-          <span class="product-description"></span>
-          <div class="product-menu product-id"  productId=''>
-            <div class="product-price">
-              9.99
-            </div>
-            <div class="buy-now">
-              Buy now!
-            </div>
-            <div class="product-detail">
-              Detail
-            </div>
-            
-            <div class="how-many">
-              <div class="quantity-input">
-                <input class="minus btn" type="button" value="-">
-                <input class="input-text quantity text" value="3" size="4">
-                <input class="plus btn" type="button" value="+">
-              </div>
-            </div>
-            <div class="cancel">
-              Cancel
-            </div>
-            <div class="add-to-cart">
-              Add to Cart!
-            </div>
+          <div class="final">
+            <span class="title">Total <span id="calculated_total">$51.00</span></span>
           </div>
         </div>
-        <div class="product-back">
-          <span class="check">
-            <i class="fa fa-check fa-4x"></i>
-            <p>Success!</p>
-          </span>
-        </div>   
-      </div> 
-    </article> 
+        <div class="right" id="reviewed">
+        
+          <div class="billing">
+            <span class="title">Billing Information:</span>
+            <form class="go-right" id="payorder">   
+              <div>
+                <input type="name" name="first_name" value="" id="first_name" placeholder="John" data-trigger="change"
+                data-validation-minlength="1" data-type="name" data-required="true" data-error-message="Enter Your First Name" /><label
+                            for="first_name">First Name</label>
+              </div>
+              <div>
+                <label for="last_name">Last Name</label>
+                  <input type="name" name="last_name" value="" id="last_name" placeholder="Smith" data-trigger="change"
+                  data-validation-minlength="1" data-type="name" data-required="true" data-error-message="Enter Your Last Name" /><label
+                            for="last_name">Last Name</label>
+              </div>
+              <div>
+                <input type="phone" name="phone_number" value="" id="phone_number" placeholder="(555)-867-5309"
+                data-trigger="change" data-validation-minlength="1" data-type="number" data-required="true"
+                data-error-message="Enter Your Telephone Number" /><label for="phone_number">Telephone</label>
+              </div>
+              </form>  
+            
+          </div>
+         
+          
+          <div class="complete">
+            <a class="big_button" id="complete" href="#">Complete Order</a>
+            <span class="sub">By selecting this button you agree to the purchase and subsequent payment for
+              this order.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </template>

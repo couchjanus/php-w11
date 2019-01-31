@@ -1,9 +1,17 @@
 <?php
+
+namespace App\Controllers;
+
+use App\Models\User;
+use Core\Controller;
+use Core\Helper;
+use Core\Session;
+
 /**
  * AuthController.php
  * Контроллер для authetication users
  */
-require_once MODELS.'User.php';
+// require_once MODELS.'User.php';
 
 class AuthController extends Controller
 {
@@ -93,5 +101,28 @@ class AuthController extends Controller
     {
         Session::destroy();
         Helper::redirect('/');
-    }   
+    }  
+    
+    public function loggedCheck()
+    {
+        if (!Session::get('logged') == true) {
+            $response = array(
+                    'r' => 'fail',
+                    'url' => 'login'
+                );
+        } else {
+   
+            $this->userId = Helper::checkLog();
+            $this->user = User::getById($this->userId);
+
+            $response = array(
+                'phone_number' => $this->user['phone_number'],
+                'last_name' => $this->user['last_name'],
+                'first_name' => $this->user['first_name']
+            );
+        }
+
+        echo json_encode($response);
+        exit;
+    }
 }

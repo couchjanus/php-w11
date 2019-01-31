@@ -2,7 +2,7 @@
 /**
  * 
  */
-
+namespace Core;
 class Uploader
 {
     //default settings

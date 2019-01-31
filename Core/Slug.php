@@ -3,7 +3,7 @@
  * Create a web friendly URL slug from a string.
  * 
  */
-
+namespace Core;
 class Slug
 {
     /**
